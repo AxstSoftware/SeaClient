@@ -2,7 +2,7 @@ buildscript {
     repositories {
         maven { url 'https://jitpack.io' }
         maven { url 'https://repo.spongepowered.org/maven' }
-        maven { url "http://files.minecraftforge.net/maven" }
+        maven { url 'http://files.minecraftforge.net/maven' }
         mavenCentral()
     }
 
