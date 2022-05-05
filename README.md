@@ -38,6 +38,7 @@ If you are here you need to setup our project!. Please follow this steps:
 * 7 - Change the line 4 with your package where mixins should be.
 * 7.1 - Change the line 5 "mixins.tweaker.refmap.json" to "mixins.TWEAKER-OR-CLIENT-NAME-STEP-3.refmap.json" please use the tweaker or client name in step 3!
 * 8 - Now the client should work! have fun learing mixins!
+* 9 - If the client wont start make sure to set the package to MAIN and not API. (IJ IDEA)
 
 ## Key Features
 
