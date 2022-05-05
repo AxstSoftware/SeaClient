@@ -1,0 +1,98 @@
+buildscript {
+    repositories {
+        maven { url 'https://jitpack.io' }
+        maven { url 'https://repo.spongepowered.org/maven' }
+        maven { url "http://files.minecraftforge.net/maven" }
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath 'net.minecraftforge.gradle:ForgeGradle:2.1-SNAPSHOT'
+        classpath 'com.github.xcfrg:MixinGradle:0.6-SNAPSHOT'
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'net.minecraftforge.gradle.tweaker-client'
+apply plugin: 'org.spongepowered.mixin'
+
+group 'io.github.sdxqw'
+version '0.1'
+archivesBaseName = 'ClientTweaker'
+String tweaker = "tweaker"
+
+sourceCompatibility = targetCompatibility = JavaVersion.VERSION_1_8
+compileJava.options.encoding = 'UTF-8'
+
+minecraft {
+    version = "1.8.9"
+    tweakClass = "io.github.sdxqw.launch.Tweaker"
+    runDir = "run"
+    mappings = "stable_22"
+    def args = [
+            "-XX:-DisableExplicitGC", "-Xms6G", "-Xmx6G", "-XX:+UseG1GC","-XX:+ParallelRefProcEnabled", "-XX:MaxGCPauseMillis=200", "-XX:+UnlockExperimentalVMOptions", "-XX:+DisableExplicitGC", "-XX:+AlwaysPreTouch", "-XX:G1NewSizePercent=30", "-XX:G1MaxNewSizePercent=40", "-XX:G1HeapRegionSize=8M", "-XX:G1ReservePercent=20", "-XX:G1HeapWastePercent=5", "-XX:G1MixedGCCountTarget=4", "-XX:InitiatingHeapOccupancyPercent=15", "-XX:G1MixedGCLiveThresholdPercent=90", "-XX:G1RSetUpdatingPauseTimePercent=5", "-XX:SurvivorRatio=32", "-XX:+PerfDisableSharedMem", "-XX:MaxTenuringThreshold=1"
+    ]
+    clientJvmArgs.addAll(args)
+    makeObfSourceJar = true
+}
+
+repositories {
+    maven { url 'https://jitpack.io' }
+    maven { url 'https://repo.spongepowered.org/repository/maven-public/' }
+    maven { url 'https://maven.minecraftforge.net/' }
+    mavenCentral()
+}
+
+dependencies {
+    compile('org.spongepowered:mixin:0.7.11-SNAPSHOT') {
+        exclude module: 'launchwrapper'
+        exclude module: 'guava'
+        exclude module: 'gson'
+        exclude module: 'commons-io'
+    }
+    compile group: 'org.reflections', name: 'reflections', version: '0.9.10'
+}
+
+mixin {
+    defaultObfuscationEnv = "notch"
+    add sourceSets.main, "mixins.${tweaker}.refmap.json"
+}
+
+configurations {
+    embed
+    compile.extendsFrom(embed)
+}
+
+processResources {
+    inputs.files "src/main/resources"
+    outputs.dir "build/classes/main"
+    copy {
+        from("src/main/resources")
+        into("build/classes/main")
+    }
+}
+
+jar {
+    dependsOn configurations.compile
+    from {
+        configurations.embed.collect {
+            it.isDirectory() ? it : zipTree(it)
+        }
+    }
+    exclude 'META-INF/*.RSA', 'META-INF/*.SF', 'META-INF/*.DSA'
+}
+
+jar {
+    manifest.attributes(
+            "MixinConfigs": "mixins.${tweaker}.json",
+            "TweakClass": 'io.github.sdxqw.launch.Tweaker',
+            "TweakOrder": 0,
+            "Manifest-Version": 1.0
+    )
+
+    configurations.embed.each { dep ->
+        from(project.zipTree(dep)) {
+            exclude 'META-INF', 'META-INF/**'
+        }
+    }
+}
