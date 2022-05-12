@@ -17,6 +17,7 @@
 
 <h3 align="center">
     <a href="#get-start">Get start</a> •
+     <a href="#building-with-optfine">Building With Optfine</a> •
     <a href="#key-features">Key Features</a> •
     <a href="#thanks">Thanks</a> •
     <a href="#contributing">Contributing</a> •
@@ -39,6 +40,10 @@ If you are here you need to setup our project!. Please follow this steps:
 * 7.1 - Change the line 5 "mixins.tweaker.refmap.json" to "mixins.TWEAKER-OR-CLIENT-NAME-STEP-3.refmap.json" please use the tweaker or client name in step 3!
 * 8 - Now the client should work! have fun learing mixins!
 * 9 - If the client wont start make sure to set the package to MAIN and not API. (IJ IDEA)
+
+## Building With Optfine
+
+REALLY SOON!!!
 
 ## Key Features
 
