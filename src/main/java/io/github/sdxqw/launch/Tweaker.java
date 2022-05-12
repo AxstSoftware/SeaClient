@@ -15,35 +15,33 @@ import java.util.List;
 
 public class Tweaker implements ITweaker {
 
-    private final List<String> launchArguments;
-    public static final Logger logger;
+    private final List<String> launchArguments = Lists.newArrayList();
 
-    public Tweaker() {
-        this.launchArguments = Lists.newArrayList();
-    }
-
-    public void acceptOptions(final List<String> args, final File gameDir, final File assetsDir, final String profile) {
+    public final void acceptOptions(List<String> args, File gameDir, File assetsDir, String profile) {
         this.launchArguments.addAll(args);
         if (!args.contains("--version") && profile != null) {
             this.launchArguments.add("--version");
             this.launchArguments.add(profile);
         }
+
         if (!args.contains("--assetDir") && assetsDir != null) {
             this.launchArguments.add("--assetDir");
             this.launchArguments.add(assetsDir.getAbsolutePath());
         }
+
         if (!args.contains("--gameDir") && gameDir != null) {
             this.launchArguments.add("--gameDir");
             this.launchArguments.add(gameDir.getAbsolutePath());
         }
+
     }
 
     public void injectIntoClassLoader(final LaunchClassLoader classLoader) {
         MixinBootstrap.init();
         final MixinEnvironment env = MixinEnvironment.getDefaultEnvironment();
-        // remove the "StartClient.instance.tweaker" instance, and put the same name of the file json like "mixins.tweaker.json"
-        // if you don't want an instance.
-        Mixins.addConfiguration("mixins." + StartClient.instance.tweaker +".json");
+        //Remove StartClient.instance.tweaker and put the same of .json
+        //if you don't want that instance there.
+        Mixins.addConfiguration("mixins." + StartClient.instance.tweaker + ".json");
         if (env.getObfuscationContext() == null) {
             env.setObfuscationContext("notch");
         }
@@ -51,14 +49,10 @@ public class Tweaker implements ITweaker {
     }
 
     public String getLaunchTarget() {
-        return "net.minecraft.client.main.Main";
+        return MixinBootstrap.getPlatform().getLaunchTarget();
     }
 
     public String[] getLaunchArguments() {
         return this.launchArguments.toArray(new String[0]);
-    }
-
-    static {
-        logger = LogManager.getLogger();
     }
 }
