@@ -8,6 +8,8 @@
   "verbose": true,
   "mixins": [
     "GuiIngameMixin",
-    "MinecraftMixin"
+    "GuiMainMenuMixin",
+    "MinecraftMixin",
+    "interfaces.IMinecraftMixin"
   ]
 }

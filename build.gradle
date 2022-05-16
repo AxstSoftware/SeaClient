@@ -49,7 +49,8 @@ configurations {
 }
 
 dependencies {
-    implementation('org.projectlombok:lombok:1.18.24')
+    compileOnly('org.projectlombok:lombok:1.18.24')
+    annotationProcessor('org.projectlombok:lombok:1.18.24')
     embed('org.spongepowered:mixin:0.7.11-SNAPSHOT') {
         exclude module: 'launchwrapper'
         exclude module: 'guava'
@@ -61,6 +62,16 @@ dependencies {
         exclude module: 'guava'
     }
     embed('org.slick2d:slick2d-core:1.0.2')
+    embed('com.github.Litarvan:OpenAuth:1.1.2')
+    embed('com.github.jagrosh:DiscordIPC:e29d6d8') {
+        exclude module: 'log4j'
+    }
+    annotationProcessor 'com.google.guava:guava:31.1-jre'
+    annotationProcessor 'org.apache.logging.log4j:log4j-core:2.17.2'
+    annotationProcessor 'org.ow2.asm:asm-tree:9.3'
+    annotationProcessor 'org.ow2.asm:asm-commons:9.3'
+    annotationProcessor 'org.ow2.asm:asm-util:9.3'
+    annotationProcessor 'com.google.code.gson:gson:2.9.0'
 }
 
 mixin {

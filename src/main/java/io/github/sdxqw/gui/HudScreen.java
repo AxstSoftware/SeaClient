@@ -3,7 +3,6 @@ package io.github.sdxqw.gui;
 import io.github.sdxqw.SeaCore;
 import io.github.sdxqw.module.Module;
 import io.github.sdxqw.module.renderer.RenderModule;
-import io.github.sdxqw.utils.GuiUtils;
 import io.github.sdxqw.utils.interfaces.IHelper;
 import net.minecraft.client.gui.GuiScreen;
 
