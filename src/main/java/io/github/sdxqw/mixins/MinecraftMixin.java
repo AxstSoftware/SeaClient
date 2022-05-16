@@ -1,6 +1,6 @@
 package io.github.sdxqw.mixins;
 
-import io.github.sdxqw.StartClient;
+import io.github.sdxqw.SeaCore;
 import net.minecraft.client.Minecraft;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -12,6 +12,6 @@ public class MinecraftMixin {
 
     @Inject(method = "startGame", at = @At("HEAD"))
     public void startGame(CallbackInfo ci) {
-        StartClient.instance.onInitClient();
+        SeaCore.instance.onInitClient();
     }
 }

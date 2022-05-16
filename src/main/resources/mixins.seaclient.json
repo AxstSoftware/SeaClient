@@ -3,7 +3,7 @@
   "minVersion": "0.7",
   "compatibilityLevel": "JAVA_8",
   "package": "io.github.sdxqw.mixins",
-  "refmap": "mixins.tweaker.refmap.json",
+  "refmap": "mixins.seaclient.refmap.json",
   "verbose": true,
   "mixins": [
     "MinecraftMixin"

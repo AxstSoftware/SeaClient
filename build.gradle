@@ -18,15 +18,15 @@ apply plugin: 'org.spongepowered.mixin'
 
 group 'io.github.sdxqw'
 version '0.1'
-archivesBaseName = 'ClientTweaker'
-String tweaker = "tweaker"
+archivesBaseName = 'SeaClient'
+String tweaker = "seaclient"
 
 sourceCompatibility = targetCompatibility = JavaVersion.VERSION_1_8
 compileJava.options.encoding = 'UTF-8'
 
 minecraft {
     version = "1.8.9"
-    tweakClass = "io.github.sdxqw.launch.Tweaker"
+    tweakClass = "io.github.sdxqw.launch.SeaTweaker"
     runDir = "run"
     mappings = "stable_22"
     def args = [
@@ -49,6 +49,7 @@ configurations {
 }
 
 dependencies {
+    implementation('org.projectlombok:lombok:1.18.24')
     embed('org.spongepowered:mixin:0.7.11-SNAPSHOT') {
         exclude module: 'launchwrapper'
         exclude module: 'guava'
@@ -59,6 +60,7 @@ dependencies {
         exclude module: 'google-collections'
         exclude module: 'guava'
     }
+    embed('org.slick2d:slick2d-core:1.0.2')
 }
 
 mixin {
@@ -88,7 +90,7 @@ jar {
 jar {
     manifest.attributes(
             "MixinConfigs": "mixins.${tweaker}.json",
-            "TweakClass": 'io.github.sdxqw.launch.Tweaker',
+            "TweakClass": 'io.github.sdxqw.launch.SeaTweaker',
             "TweakOrder": 0,
             "Manifest-Version": 1.0
     )
