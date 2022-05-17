@@ -7,10 +7,15 @@ import io.github.sdxqw.utils.interfaces.IHelper;
 import net.minecraft.client.gui.GuiScreen;
 
 import java.awt.*;
+import java.util.ArrayList;
 
 public class HudScreen extends GuiScreen implements IHelper {
 
     private int lastDraggedMod = 0;
+
+    @Override
+    public void initGui() {
+    }
 
     @Override
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {

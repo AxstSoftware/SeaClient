@@ -63,8 +63,8 @@ public abstract class MinecraftMixin {
         if (Util.getOSType() != Util.EnumOS.OSX)
         {
             try {
-                InputStream inputStream = MinecraftMixin.class.getResourceAsStream( "" );
-                InputStream inputStream1 = MinecraftMixin.class.getResourceAsStream( "" );
+                InputStream inputStream = MinecraftMixin.class.getResourceAsStream( "/assets/minecraft/seaclient/logo.png" );
+                InputStream inputStream1 = MinecraftMixin.class.getResourceAsStream( "/assets/minecraft/seaclient/logo.png" );
 
                 if (inputStream == null) {
                     inputStream = this.mcDefaultResourcePack.getInputStreamAssets( new ResourceLocation( "icons/icon_16x16.png" ) );
