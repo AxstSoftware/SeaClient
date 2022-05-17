@@ -31,7 +31,7 @@ public class GuiMainMenuMixin extends GuiScreen implements IHelper {
         this.buttonList.add(new CustomGuiButton(1, sr.getScaledWidth() / 2 - 65, sr.getScaledHeight() / 2 - 10, 130, 25, "SINGLEPLAYER"));
         this.buttonList.add(new CustomGuiButton(2, sr.getScaledWidth() / 2 - 65, sr.getScaledHeight() / 2 + 20, 130, 25, "MULTIPLAYER"));
         this.buttonList.add(new CustomGuiIcon( 3, sr.getScaledWidth() / 2 - 10, sr.getScaledHeight() / 2 + 65, "web.png" ) );
-        this.buttonList.add(new CustomGuiIcon( 4, sr.getScaledWidth() / 2 - 50, sr.getScaledHeight() / 2 + 65, "yt.png" ) );
+        this.buttonList.add(new CustomGuiIcon( 4, sr.getScaledWidth() / 2 - 50, sr.getScaledHeight() / 2 + 65, "youtube.png" ) );
         this.buttonList.add(new CustomGuiIcon( 5, sr.getScaledWidth() / 2 - 90, sr.getScaledHeight() / 2 + 65, "logo.png" ) );
         this.buttonList.add(new CustomGuiIcon( 6, sr.getScaledWidth() / 2 + 30, sr.getScaledHeight() / 2 + 65, "discord.png" ) );
         this.buttonList.add(new CustomGuiIcon( 7, sr.getScaledWidth() / 2 + 70, sr.getScaledHeight() / 2 + 65, "settings.png" ) );
