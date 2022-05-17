@@ -1,7 +1,7 @@
 package io.github.sdxqw;
 
 import io.github.sdxqw.discord.DiscordIPC;
-import io.github.sdxqw.gui.HudScreen;
+import io.github.sdxqw.gui.module.HudScreen;
 import io.github.sdxqw.module.ModuleManager;
 import io.github.sdxqw.utils.Keybindings;
 import io.github.sdxqw.utils.SessionChanger;

@@ -1,4 +1,4 @@
-package io.github.sdxqw.gui;
+package io.github.sdxqw.gui.buttons;
 
 import io.github.sdxqw.utils.GuiUtils;
 import net.minecraft.client.Minecraft;

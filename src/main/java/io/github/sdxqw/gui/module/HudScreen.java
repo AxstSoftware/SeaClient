@@ -1,4 +1,4 @@
-package io.github.sdxqw.gui;
+package io.github.sdxqw.gui.module;
 
 import io.github.sdxqw.SeaCore;
 import io.github.sdxqw.module.Module;

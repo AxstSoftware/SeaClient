@@ -1,14 +1,13 @@
 {
   "required": true,
-  "minVersion": "0.7",
+  "minVersion": "0.6",
   "compatibilityLevel": "JAVA_8",
-  "target": "@env(DEFAULT)",
   "package": "io.github.sdxqw.mixins",
   "refmap": "mixins.seaclient.refmap.json",
   "verbose": true,
   "mixins": [
-    "GuiIngameMixin",
-    "GuiMainMenuMixin",
+    "gui.GuiIngameMixin",
+    "gui.GuiMainMenuMixin",
     "MinecraftMixin",
     "interfaces.IMinecraftMixin"
   ]

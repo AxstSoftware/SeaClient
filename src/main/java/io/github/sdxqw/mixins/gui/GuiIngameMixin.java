@@ -1,4 +1,4 @@
-package io.github.sdxqw.mixins;
+package io.github.sdxqw.mixins.gui;
 
 import io.github.sdxqw.SeaCore;
 import net.minecraft.client.gui.GuiIngame;

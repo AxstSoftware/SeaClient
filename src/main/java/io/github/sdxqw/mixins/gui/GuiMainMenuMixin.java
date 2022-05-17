@@ -1,8 +1,8 @@
-package io.github.sdxqw.mixins;
+package io.github.sdxqw.mixins.gui;
 
 import io.github.sdxqw.SeaCore;
-import io.github.sdxqw.gui.CustomGuiButton;
-import io.github.sdxqw.gui.CustomGuiIcon;
+import io.github.sdxqw.gui.buttons.CustomGuiButton;
+import io.github.sdxqw.gui.buttons.CustomGuiIcon;
 import io.github.sdxqw.utils.GuiUtils;
 import io.github.sdxqw.utils.interfaces.IHelper;
 import net.minecraft.client.gui.Gui;
