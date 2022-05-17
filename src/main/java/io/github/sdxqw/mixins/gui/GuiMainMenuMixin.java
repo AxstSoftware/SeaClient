@@ -4,11 +4,9 @@ import io.github.sdxqw.SeaCore;
 import io.github.sdxqw.gui.buttons.CustomGuiButton;
 import io.github.sdxqw.gui.buttons.CustomGuiIcon;
 import io.github.sdxqw.utils.GuiUtils;
+import io.github.sdxqw.utils.LinkOpener;
 import io.github.sdxqw.utils.interfaces.IHelper;
-import net.minecraft.client.gui.Gui;
-import net.minecraft.client.gui.GuiMainMenu;
-import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.client.gui.ScaledResolution;
+import net.minecraft.client.gui.*;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.input.Mouse;
@@ -16,6 +14,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 
 import java.awt.*;
+import java.io.IOException;
 
 @Mixin(GuiMainMenu.class)
 public class GuiMainMenuMixin extends GuiScreen implements IHelper {
@@ -31,7 +30,7 @@ public class GuiMainMenuMixin extends GuiScreen implements IHelper {
         final ScaledResolution sr = new ScaledResolution( mc );
         this.buttonList.add(new CustomGuiButton(1, sr.getScaledWidth() / 2 - 65, sr.getScaledHeight() / 2 - 10, 130, 25, "SINGLEPLAYER"));
         this.buttonList.add(new CustomGuiButton(2, sr.getScaledWidth() / 2 - 65, sr.getScaledHeight() / 2 + 20, 130, 25, "MULTIPLAYER"));
-        this.buttonList.add(new CustomGuiIcon( 0, sr.getScaledWidth() / 2 - 10, sr.getScaledHeight() / 2 + 65, "web.png" ) );
+        this.buttonList.add(new CustomGuiIcon( 3, sr.getScaledWidth() / 2 - 10, sr.getScaledHeight() / 2 + 65, "web.png" ) );
         this.buttonList.add(new CustomGuiIcon( 4, sr.getScaledWidth() / 2 - 50, sr.getScaledHeight() / 2 + 65, "yt.png" ) );
         this.buttonList.add(new CustomGuiIcon( 5, sr.getScaledWidth() / 2 - 90, sr.getScaledHeight() / 2 + 65, "logo.png" ) );
         this.buttonList.add(new CustomGuiIcon( 6, sr.getScaledWidth() / 2 + 30, sr.getScaledHeight() / 2 + 65, "discord.png" ) );
@@ -61,4 +60,33 @@ public class GuiMainMenuMixin extends GuiScreen implements IHelper {
         SeaCore.INSTANCE.clientFontBoldSmaller.drawString(copyright, this.width - this.fontRendererObj.getStringWidth(copyright) - 14, this.height - 14, new Color( 230, 230, 230, 157 ).getRGB());
         super.drawScreen(mouseX, mouseY, partialTicks);
     }
+
+    /**
+     * @author sdxqw
+     */
+    @Overwrite
+    public void actionPerformed(GuiButton button) {
+        switch (button.id) {
+            case 1:
+                minecraft.displayGuiScreen( new GuiSelectWorld(this) );
+                break;
+            case 2:
+                minecraft.displayGuiScreen( new GuiMultiplayer( this ) );
+                break;
+            case 3:
+            case 4:
+            case 5:
+                break;
+            case 6:
+                LinkOpener.openLink( "https://discord.gg/nYqXvGPh3F" );
+                break;
+            case 7:
+                minecraft.displayGuiScreen(new GuiOptions(this, this.mc.gameSettings));
+                break;
+            case 8:
+                minecraft.shutdown();
+                break;
+        }
+    }
+
 }
