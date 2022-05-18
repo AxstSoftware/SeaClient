@@ -8,25 +8,25 @@ import net.minecraft.client.gui.Gui;
 import java.awt.*;
 
 public class ModuleButton {
-    public int x, y, w, h;
-    public Module m;
+    public int x, y, withIn, heightIn;
+    public Module module;
 
-    public ModuleButton(int x, int y, int w, int h, Module m) {
+    public ModuleButton(int x, int y, int withIn, int heightIn, Module module) {
         this.x = x;
         this.y = y;
-        this.w = w;
-        this.h = h;
-        this.m = m;
+        this.withIn = withIn;
+        this.heightIn = heightIn;
+        this.module = module;
     }
 
     public void draw() {
-        GuiUtils.drawSmoothRoundedRect(x, y, x + w, y + h, 10, new Color(55, 55, 55).getRGB());
-        Gui.drawRect(x + w - 20, y, x + w, y + h, getColor());
-        IHelper.font.drawString(m.name, x + w - 20 - IHelper.font.getStringWidth(m.getName()) - 5, y + h / 2 - IHelper.font.FONT_HEIGHT / 2, -1);
+        GuiUtils.drawSmoothRoundedRect(x, y, x + withIn, y + heightIn, 10, new Color(55, 55, 55).getRGB());
+        Gui.drawRect(x + withIn - 20, y, x + withIn, y + heightIn, getColor());
+        IHelper.font.drawString(module.name, x + withIn - 20 - IHelper.font.getStringWidth(module.getName()) - 5, y + heightIn / 2 - IHelper.font.FONT_HEIGHT / 2, -1);
     }
 
     private int getColor() {
-        if(m.isEnabled()) {
+        if(module.isEnabled()) {
             return new Color(32, 189, 45, 255).getRGB();
         } else {
             return new Color(189, 32, 32).getRGB();
@@ -35,9 +35,9 @@ public class ModuleButton {
 
 
     public void onClick(int mouseX, int mouseY, int button) {
-        if(mouseX >= x && mouseY >= y && mouseX < x + w && mouseY < y + h) {
+        if(mouseX >= x && mouseY >= y && mouseX < x + withIn && mouseY < y + heightIn) {
             if(button == 0) {
-                m.toggleModule();
+                module.toggleModule();
             }
         }
 
