@@ -30,7 +30,6 @@ public class GuiUtils implements IHelper {
         }
     }
 
-
     public static void enableGL2D() {
         GL11.glDisable(2929);
         GL11.glEnable(3042);
