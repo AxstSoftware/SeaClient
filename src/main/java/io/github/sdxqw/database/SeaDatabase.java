@@ -1,6 +1,5 @@
 package io.github.sdxqw.database;
 
-import io.github.sdxqw.utils.interfaces.ILogger;
 import java.sql.*;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -9,42 +8,44 @@ import java.sql.SQLException;
 public class SeaDatabase {
     public static final SeaDatabase INSTANCE;
     public String url = "jdbc:sqlite:seaclient.db";
-    public Connection connection;
-    public Statement statement;
 
-    public void initConnection() {
-        try {
-            Class.forName("org.sqlite.JDBC");
-            connection = DriverManager.getConnection(url);
-            statement = connection.createStatement();
-            String createTable = "CREATE TABLE IF NOT EXISTS cosmetics_seaclient(" +
-                    "cape_name TEXT NOT NULL PRIMARY KEY," +
-                    "player_name TEXT NOT NULL"+
-                    ");";
-            statement.executeUpdate(createTable);
-            insertCapes( "cape" );
-            insertName( "SuchSpeed" );
-        }
-        catch (ClassNotFoundException | SQLException e) {
-            e.printStackTrace();
-            ILogger.error("Connection failed!");
-        }
+    public void startDatabase() {
+        createDb();
+        createTable();
+        insert( "cape", "cape_name" );
     }
 
-    public void insertCapes(String cape) {
-        String sql = "INSERT INTO cosmetics_seaclient(cape_name) VALUES(?)";
-        try (PreparedStatement prepareStatement = connection.prepareStatement(sql)) {
-            prepareStatement.setString(1, cape);
-            prepareStatement.executeUpdate();
+    private void createDb() {
+        try (Connection conn = getConnection()) {
+            if (conn != null) {
+                conn.getMetaData();
+            }
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            e.printStackTrace();
         }
     }
 
-    public void insertName(String name) {
-        String sql = "INSERT INTO cosmetics_seaclient(player_name) VALUES(?)";
-        try (PreparedStatement prepareStatement = connection.prepareStatement(sql)) {
-            prepareStatement.setString(1, name);
+    private void createTable() {
+        final String createTable = "CREATE TABLE IF NOT EXISTS cosmetics_seaclient(" +
+                "cape_name TEXT PRIMARY KEY NOT NULL ," +
+                "player_name TEXT NOT NULL"+
+                ");";
+        try (Connection con = getConnection(); Statement statement = con.createStatement()) {
+            statement.executeUpdate(createTable);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public Connection getConnection() throws SQLException {
+        return DriverManager.getConnection(url);
+    }
+
+    public void insert(String cape, String name) {
+        String sql = "INSERT INTO cosmetics_seaclient VALUES(?,?)";
+        try (PreparedStatement prepareStatement = getConnection().prepareStatement(sql)) {
+            prepareStatement.setString(1, cape);
+            prepareStatement.setString(2, name);
             prepareStatement.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e.getMessage());

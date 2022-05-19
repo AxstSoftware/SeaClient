@@ -28,7 +28,7 @@ public class SeaCore implements IReference {
     public void onInitialize() {
         ILogger.info("Initializing Client");
         SessionChanger.getInstance().setUserOffline("SuchSpeed");
-        new Thread( SeaDatabase.INSTANCE::initConnection, "Cosmetic Fetcher").start();
+        new Thread( SeaDatabase.INSTANCE::startDatabase, "Database Fetcher").start();
         registerInstances();
         loadFonts();
         DiscordIPC.INSTANCE.init();
