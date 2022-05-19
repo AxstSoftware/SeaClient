@@ -10,47 +10,46 @@ import java.util.List;
 
 public class Database {
     public static final Database INSTANCE;
+    public String url = "jdbc:sqlite:seaclient.db";
     protected final List<Connection> activeConnections;
 
     public Database() {
         this.activeConnections = Lists.newArrayList();
     }
 
-    public Connection initConnection() {
+    public java.sql.Connection initConnection() {
         try {
             Class.forName("org.sqlite.JDBC");
-            String url = "jdbc:sqlite:seaclient.db";
             java.sql.Connection connection = DriverManager.getConnection(url);
             createCosmetics( connection );
-            return new Connection(connection);
+            insertCapes( "SuchSpeed", "cape" );
         }
         catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
             ILogger.error("Connection failed!");
-            return null;
         }
+        return null;
     }
 
-    public void createCosmetics( java.sql.Connection connection) {
+    public void createCosmetics(java.sql.Connection connection) {
         Statement statement;
         try {
             statement = connection.createStatement();
-            String createTable = "CREATE TABLE IF NOT EXISTS cosmetics" +
-                    "(ID INT PRIMARY KEY NOT NULL," +
-                    "data TEXT NOT NULL," +
-                    "name TEXT," +
-                    "REAL)";
+            String createTable = "CREATE TABLE IF NOT EXISTS cosmetics(" +
+                    "`player_name` TEXT NOT NULL," +
+                    "`cape_name` TEXT NOT NULL" +
+                    ");";
             statement.executeUpdate(createTable);
         } catch (SQLException e) {
             throw new RuntimeException( e );
         }
     }
 
-    public void insertCapes(String data, String name) {
-        String sql = "INSERT INTO cosmetics(data,name) VALUES(?,?)";
+    public void insertCapes(String player, String cape) {
+        String sql = "INSERT INTO cosmetics(`player_name`,`cape_name`) VALUES(?,?)";
         try (PreparedStatement prepareStatement = Database.INSTANCE.initConnection().prepareStatement(sql)) {
-            prepareStatement.setString(1, data);
-            prepareStatement.setString(2, name);
+            prepareStatement.setString(1, player);
+            prepareStatement.setString(2, cape);
             prepareStatement.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -59,18 +58,5 @@ public class Database {
 
     static {
         INSTANCE = new Database();
-    }
-
-    public static class Connection {
-        public final java.sql.Connection connection;
-
-        public Connection(final java.sql.Connection connection) {
-            this.connection = connection;
-            Database.INSTANCE.activeConnections.add(this);
-        }
-
-        public PreparedStatement prepareStatement(final String statement) throws SQLException {
-            return this.connection.prepareStatement(statement);
-        }
     }
 }

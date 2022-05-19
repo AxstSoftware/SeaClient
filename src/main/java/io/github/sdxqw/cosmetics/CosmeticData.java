@@ -9,13 +9,13 @@ public class CosmeticData {
     @Getter
     private final List<CosmeticsManager.CosmeticList> cosmetics;
     @Getter
-    private final String data;
+    private final String player;
     @Getter
     private final ResourceLocation capeTexture;
 
-    public CosmeticData(final List<CosmeticsManager.CosmeticList> cosmetics, final String data, final ResourceLocation capeTexture) {
+    public CosmeticData(final List<CosmeticsManager.CosmeticList> cosmetics, final String player, final ResourceLocation capeTexture) {
         this.cosmetics = cosmetics;
-        this.data = data;
+        this.player = player;
         this.capeTexture = capeTexture;
     }
 }

@@ -7,9 +7,7 @@ import io.github.sdxqw.database.Database;
 import io.github.sdxqw.utils.interfaces.ILogger;
 import net.minecraft.util.ResourceLocation;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -20,31 +18,30 @@ public class CosmeticsManager {
 
     public static void init() {
         ILogger.info("Initializing connection..." );
-        final Database.Connection connection = Database.INSTANCE.initConnection();
         try {
-            final PreparedStatement statement = connection.prepareStatement("SELECT * FROM `cosmetics`");
+            final Connection connection = DriverManager.getConnection(Database.INSTANCE.url);
+            final PreparedStatement statement = connection.prepareStatement( "SELECT * FROM cosmetics" );
             try {
                 final ResultSet result = statement.executeQuery();
                 try {
                     if (result != null) {
                         while (result.next()) {
                             final List<CosmeticList> cosmeticList = Lists.newArrayList();
-                            for (final String cosmetic : result.getObject("id").toString().split(",")) {
+                            for (final String cosmetic : result.getObject("cape_name").toString().split(",")) {
                                 cosmeticList.add(CosmeticList.valueOf(cosmetic));
                             }
-                            Database.INSTANCE.insertCapes( "cape", "SuchSpeed" );
-                            final String data = result.getString("data");
+                            final String player = result.getString("player_name");
                             final HashMap<String, CosmeticData> cosmetics = CosmeticsManager.cosmetics;
-                            final String string = result.getString("name");
+                            final String cape = result.getString("cape_name");
                             ResourceLocation capeTexture;
                             if (cosmeticList.contains(CosmeticList.CAPES)) {
                                 final StringBuilder sb = new StringBuilder();
-                                capeTexture = new ResourceLocation(sb.append("seaclient/capes/").append(getCapeName(data)).append(".png").toString());
+                                capeTexture = new ResourceLocation(sb.append("seaclient/capes/").append(getCapeName(cape)).append(".png").toString());
                             }
                             else {
                                 capeTexture = null;
                             }
-                            cosmetics.put(string, new CosmeticData( cosmeticList, data, capeTexture));
+                            cosmetics.put(cape, new CosmeticData( cosmeticList, player, capeTexture));
                         }
                     }
                 }
@@ -72,8 +69,24 @@ public class CosmeticsManager {
         return CosmeticsManager.cosmetics.containsKey(uuid) && CosmeticsManager.cosmetics.get(uuid).getCosmetics().stream().anyMatch(cosmetic -> cosmetic == CosmeticList.CAPES);
     }
 
-    public static String getCapeName(final String json) {
-        return new JsonParser().parse(json).getAsJsonObject().get("cape").getAsString();
+    public static String getCapeName(final String string) {
+        Connection connection;
+        PreparedStatement prepareStatement;
+        ResultSet resultSet;
+        try {
+            connection = Database.INSTANCE.initConnection();
+            prepareStatement = connection.prepareStatement("SELECT * FROM cosmetics WHERE cape_name = '"+string+"';");
+
+            resultSet = prepareStatement.executeQuery();
+            while(resultSet.next()){
+                if(resultSet.getString("cape_name").equalsIgnoreCase(string.toLowerCase())) {
+                    return resultSet.getString("cape_name");
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException( e );
+        }
+        return null;
     }
 
     static {
@@ -84,6 +97,6 @@ public class CosmeticsManager {
     {
         CAPES,
         WINGS,
-        BACK_TOOL;
+        BACK_TOOL
     }
 }
