@@ -13,6 +13,22 @@ public class SeaDatabase {
         createDb();
         createTable();
         insert( "cape", "cape_name" );
+        System.out.println(getPlayer( "cape_name" ));
+    }
+
+    public String getPlayer(String player) {
+        try {
+            PreparedStatement prepareStatement = getConnection().prepareStatement("SELECT * FROM cosmetics_seaclient WHERE cape_name = '"+player+"';");
+            ResultSet resultSet = prepareStatement.executeQuery();
+            while(resultSet.next()) {
+                if (resultSet.getString( "cape_name" ).equalsIgnoreCase( player.toLowerCase() )) {
+                    resultSet.getString( "player_name" );
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException( e );
+        }
+        return null;
     }
 
     private void createDb() {
