@@ -66,6 +66,7 @@ dependencies {
     embed('com.github.jagrosh:DiscordIPC:e29d6d8') {
         exclude module: 'log4j'
     }
+    embed('org.xerial:sqlite-jdbc:3.36.0.3')
     annotationProcessor 'com.google.guava:guava:31.1-jre'
     annotationProcessor 'org.apache.logging.log4j:log4j-core:2.17.2'
     annotationProcessor 'org.ow2.asm:asm-tree:9.3'

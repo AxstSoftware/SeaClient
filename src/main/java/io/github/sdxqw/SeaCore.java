@@ -1,5 +1,6 @@
 package io.github.sdxqw;
 
+import io.github.sdxqw.cosmetics.CosmeticsManager;
 import io.github.sdxqw.discord.DiscordIPC;
 import io.github.sdxqw.gui.module.HudScreen;
 import io.github.sdxqw.module.ModuleManager;
@@ -26,6 +27,7 @@ public class SeaCore implements IReference {
 
     public void onInitialize() {
         ILogger.info("Initializing Client");
+        new Thread( CosmeticsManager::init, "Cosmetic Fetcher").start();
         registerInstances();
         loadFonts();
         SessionChanger.getInstance().setUserOffline("SuchSpeed");
