@@ -3,7 +3,6 @@ package io.github.sdxqw.module.settings.impl;
 import io.github.sdxqw.module.Module;
 import io.github.sdxqw.module.settings.Settings;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
