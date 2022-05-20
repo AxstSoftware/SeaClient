@@ -54,7 +54,7 @@ public class GuiMainMenuMixin extends GuiScreen implements IHelper {
         Gui.drawModalRectWithCustomSizedTexture(-22 + (Mouse.getX() / 90), ((Mouse.getY() * -1 / 90)), 0, 0, width + 20, height + 18, width + 21, height + 20);
         GuiUtils.draw2DImage(logo, sr.getScaledWidth() / 2 - 40, sr.getScaledHeight() / 2 - 100, 80, 80, new Color(255,255,255));
         GlStateManager.popMatrix();
-        String watermark = "Sea Client (1.8.9-v7)";
+        String watermark = "Sea Client (1.8.9-v1.1)";
         SeaCore.INSTANCE.clientFontBoldSmaller.drawString(watermark,4, this.height - 14, new Color( 230, 230, 230, 157 ).getRGB());
         String copyright = "Copyright Mojang AB. Do not distribute!";
         SeaCore.INSTANCE.clientFontBoldSmaller.drawString(copyright, this.width - this.fontRendererObj.getStringWidth(copyright) - 14, this.height - 14, new Color( 230, 230, 230, 157 ).getRGB());
