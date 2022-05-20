@@ -1,6 +1,7 @@
 package io.github.sdxqw.mixins;
 
 import io.github.sdxqw.SeaCore;
+import io.github.sdxqw.events.TickEvent;
 import io.github.sdxqw.utils.interfaces.IHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiControls;
@@ -51,6 +52,11 @@ public abstract class MinecraftMixin {
     @Inject(method = { "dispatchKeypresses" }, at = { @At("HEAD") })
     private void dispatchKeypresses(final CallbackInfo ci) {
         SeaCore.INSTANCE.onKeyPress();
+    }
+
+    @Inject(method = { "runTick" }, at = @At("HEAD"))
+    private void injectRunTick(CallbackInfo ci) {
+        SeaCore.INSTANCE.eventBus.post( new TickEvent() );
     }
 
     /**

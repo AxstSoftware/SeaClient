@@ -1,7 +1,9 @@
 package io.github.sdxqw;
 
-import io.github.sdxqw.database.SeaDatabase;
+import com.google.common.eventbus.EventBus;
+import com.google.common.eventbus.Subscribe;
 import io.github.sdxqw.discord.DiscordIPC;
+import io.github.sdxqw.events.TickEvent;
 import io.github.sdxqw.gui.module.HudScreen;
 import io.github.sdxqw.module.ModuleManager;
 import io.github.sdxqw.utils.Keybindings;
@@ -15,6 +17,7 @@ import net.minecraft.util.ResourceLocation;
 public class SeaCore implements IReference {
 
     public static SeaCore INSTANCE;
+    public final EventBus eventBus = new EventBus();
     public Keybindings keybindings;
     public ModuleManager moduleManager;
     public CFontRenderer clientFont;
@@ -26,9 +29,9 @@ public class SeaCore implements IReference {
     }
 
     public void onInitialize() {
+        eventBus.register( INSTANCE );
         ILogger.info("Initializing Client");
         SessionChanger.getInstance().setUserOffline("SuchSpeed");
-        new Thread( SeaDatabase.INSTANCE::startDatabase, "Database Fetcher").start();
         registerInstances();
         loadFonts();
         DiscordIPC.INSTANCE.init();
@@ -38,6 +41,11 @@ public class SeaCore implements IReference {
         if(Keybindings.HUD_SCREEN.isPressed()) {
             IHelper.minecraft.displayGuiScreen( new HudScreen() );
         }
+    }
+
+    @Subscribe
+    public void TickClient(TickEvent event) {
+        ILogger.info( "this event work!" );
     }
 
     public void registerInstances() {
