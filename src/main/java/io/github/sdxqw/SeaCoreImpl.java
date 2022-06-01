@@ -1,9 +1,7 @@
 package io.github.sdxqw;
 
-import com.google.common.eventbus.Subscribe;
 import io.github.sdxqw.discord.DiscordIPC;
 import io.github.sdxqw.events.SCEventBus;
-import io.github.sdxqw.events.type.TickEvent;
 import io.github.sdxqw.gui.module.HudScreen;
 import io.github.sdxqw.module.ModuleManager;
 import io.github.sdxqw.utils.Keybindings;
@@ -13,10 +11,6 @@ import io.github.sdxqw.utils.interfaces.IHelper;
 import io.github.sdxqw.utils.interfaces.IReference;
 import lombok.Getter;
 import net.minecraft.util.ResourceLocation;
-import org.apache.commons.lang3.ArrayUtils;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class SeaCoreImpl implements IReference {
 
