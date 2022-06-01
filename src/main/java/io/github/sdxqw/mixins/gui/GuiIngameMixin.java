@@ -11,6 +11,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class GuiIngameMixin {
     @Inject(method = "renderGameOverlay", at = @At("RETURN"))
     private void runTick (CallbackInfo info) {
-        SeaCore.INSTANCE.moduleManager.renderModules();
+        SeaCore.getINSTANCE().getModuleManager().renderModules();
     }
 }

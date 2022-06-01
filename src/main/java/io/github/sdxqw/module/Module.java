@@ -7,7 +7,9 @@ import lombok.Setter;
 public class Module implements IHelper {
 
     @Getter
-    public String name, description;
+    public final String name;
+    @Getter
+    public final String description;
 
     @Getter @Setter
     public boolean enabled;
@@ -21,9 +23,4 @@ public class Module implements IHelper {
     public void toggleModule() {
         this.setEnabled(!this.enabled);
     }
-
-    public boolean isDisabled() {
-        return !enabled;
-    }
-
 }

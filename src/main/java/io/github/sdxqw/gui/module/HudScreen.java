@@ -23,17 +23,17 @@ public class HudScreen extends GuiScreen implements IHelper {
 
         boolean doDrag = true;
 
-        for (Module module : SeaCore.INSTANCE.moduleManager.getModules()) {
+        for (Module module : SeaCore.getINSTANCE().getModuleManager().getModules()) {
             if (module.isEnabled() && module instanceof RenderModule) {
                 ((RenderModule)module).renderModule(mouseX, mouseY);
-                if (module.hashCode() == this.lastDraggedMod && ((RenderModule)module).draggableComponent.isDraggingModule(mouseX, mouseY)) {
+                if (module.hashCode() == this.lastDraggedMod && ((RenderModule)module).getDraggableComponent().isDraggingModule(mouseX, mouseY)) {
                     doDrag = false;
                 }
             }
         }
 
-        for (Module module : SeaCore.INSTANCE.moduleManager.getModules()) {
-            if (doDrag && module.isEnabled() && module instanceof RenderModule && ((RenderModule)module).draggableComponent.isDraggingModule(mouseX, mouseY)) {
+        for (Module module : SeaCore.getINSTANCE().getModuleManager().getModules()) {
+            if (doDrag && module.isEnabled() && module instanceof RenderModule && ((RenderModule)module).getDraggableComponent().isDraggingModule(mouseX, mouseY)) {
                 doDrag = false;
                 this.lastDraggedMod = module.hashCode();
             }

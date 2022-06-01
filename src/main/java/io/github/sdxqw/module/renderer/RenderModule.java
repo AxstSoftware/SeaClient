@@ -9,12 +9,16 @@ import java.awt.*;
 
 public abstract class RenderModule extends Module {
 
-    public int x, y;
+    public int x;
+    public int y;
 
     @Getter
-    public int widthIn, heightIn;
+    public int widthIn;
+    @Getter
+    public int heightIn;
 
-    public DraggableComponent draggableComponent;
+    @Getter
+    private final DraggableComponent draggableComponent;
 
     public RenderModule(String name, String description, int x, int y) {
         super( name, description );
@@ -32,7 +36,6 @@ public abstract class RenderModule extends Module {
         }
 
         GuiUtils.drawHollowRect(this.getX() - 2, this.getY() - 2, this.getWidthIn() + 3, this.getHeightIn() + 2, (new Color(170, 170, 170, 100)).getRGB());
-        this.draggableComponent.drawComponent(mouseX, mouseY);
     }
 
     public int getX() {

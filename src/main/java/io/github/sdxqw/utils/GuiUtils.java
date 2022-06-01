@@ -21,8 +21,8 @@ public class GuiUtils implements IHelper {
 
     public static void renderProfile() {
         if(minecraft.getSession().getUsername() != null){
-            SeaCore.INSTANCE.clientFontBoldSmaller.drawStringWithShadow(minecraft.getSession().getUsername(), 28, 11, new Color(255, 255, 255,255).getRGB());
-            GuiUtils.drawRoundedOutline(7, 7, (float)36 + SeaCore.INSTANCE.clientFontBoldSmaller.getStringWidth(minecraft.getSession().getUsername()), 24, 4f, 2.0f,new Color( 255,255,255 ).getRGB());
+            SeaCore.getINSTANCE().clientFontBoldSmaller.drawStringWithShadow(minecraft.getSession().getUsername(), 28, 11, new Color(255, 255, 255,255).getRGB());
+            GuiUtils.drawRoundedOutline(7, 7, (float)36 + SeaCore.getINSTANCE().clientFontBoldSmaller.getStringWidth(minecraft.getSession().getUsername()), 24, 4f, 2.0f,new Color( 255,255,255 ).getRGB());
             GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
             ResourceLocation headLocation = GuiUtils.getHeadLocation(minecraft.getSession().getUsername());
             minecraft.getTextureManager().bindTexture(headLocation);

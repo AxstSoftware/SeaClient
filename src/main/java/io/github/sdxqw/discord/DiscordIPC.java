@@ -5,13 +5,15 @@ import com.jagrosh.discordipc.IPCListener;
 import com.jagrosh.discordipc.entities.RichPresence;
 import com.jagrosh.discordipc.entities.pipe.PipeStatus;
 import io.github.sdxqw.utils.interfaces.IHelper;
+import lombok.Getter;
 import org.json.JSONObject;
 
 import java.time.OffsetDateTime;
 
 public class DiscordIPC implements IPCListener {
 
-    public static final DiscordIPC INSTANCE = new DiscordIPC();
+    @Getter
+    private static final DiscordIPC INSTANCE = new DiscordIPC();
     private IPCClient client;
     private boolean hasClient = true;
 

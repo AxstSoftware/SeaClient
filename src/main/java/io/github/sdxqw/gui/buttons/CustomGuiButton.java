@@ -17,7 +17,7 @@ public class CustomGuiButton extends GuiButton {
     public void drawButton(Minecraft mc, int mouseX, int mouseY) {
         this.hovered = (mouseX >= this.xPosition && mouseY >= this.yPosition && mouseX < this.xPosition + this.width && mouseY < this.yPosition + this.height);
         GuiUtils.drawRoundedRect(this.xPosition, this.yPosition, this.xPosition + this.width, this.yPosition + this.height, 9f, new Color( 81, 81, 81, 167 ).getRGB());
-        SeaCore.INSTANCE.clientFontBoldSmaller.drawCenteredString(this.displayString, this.xPosition + (this.width >> 1), this.yPosition + ((this.height - 8) >> 1) + 4, -1);
+        SeaCore.getINSTANCE().clientFont.drawCenteredString(this.displayString, this.xPosition + (this.width >> 1), this.yPosition + ((this.height - 8) >> 1) + 4, -1);
         this.mouseDragged( mc, mouseX, mouseY );
     }
 }

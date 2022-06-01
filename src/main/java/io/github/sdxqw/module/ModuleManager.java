@@ -14,7 +14,7 @@ public class ModuleManager {
 
     public TestModule testModule;
 
-    public ModuleManager() {
+    public void registeredModules() {
         registerModules( testModule = new TestModule() );
     }
 

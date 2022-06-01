@@ -9,19 +9,24 @@ import org.lwjgl.input.Mouse;
 import java.util.ArrayList;
 
 public class DraggableComponent {
-    ArrayList<RenderModule> modules = new ArrayList<>();
+    private final ArrayList<RenderModule> modules = new ArrayList<>();
 
     @Setter @Getter
-    public int x, y;
+    public int x;
+    @Setter @Getter
+    public int y;
 
     @Getter
-    public int widthIn, heightIn;
+    public int widthIn;
+    @Getter
+    public int heightIn;
 
-    public int lastX, lastY;
+    public int lastX;
+    public int lastY;
 
     public boolean draggingModule;
 
-    public DraggableComponent(int x, int y, int widthIn, int heightIn) {
+    protected DraggableComponent(int x, int y, int widthIn, int heightIn) {
         this.x = x;
         this.y = y;
         this.widthIn = widthIn;
@@ -68,8 +73,5 @@ public class DraggableComponent {
                 }
             }
         }
-    }
-
-    public void drawComponent(final int mouseX, final int mouseY) {
     }
 }

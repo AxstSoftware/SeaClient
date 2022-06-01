@@ -1,14 +1,11 @@
 package io.github.sdxqw.mixins;
 
 import io.github.sdxqw.SeaCore;
-import io.github.sdxqw.events.TickEvent;
-import io.github.sdxqw.utils.interfaces.IHelper;
+import io.github.sdxqw.events.type.TickEvent;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiControls;
 import net.minecraft.client.resources.DefaultResourcePack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.Util;
-import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.Display;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -31,17 +28,17 @@ public abstract class MinecraftMixin {
 
     @Inject(method = "startGame", at = @At("HEAD"))
     public void injectPreInitialize(CallbackInfo ci) {
-        SeaCore.INSTANCE.onPreInitialize();
+        SeaCore.getINSTANCE().onPreInitialize();
     }
 
     @Inject(method = "startGame", at = @At("RETURN"))
     public void injectInitialize(CallbackInfo ci) {
-        SeaCore.INSTANCE.onInitialize();
+        SeaCore.getINSTANCE().onInitialize();
     }
 
     @Inject(method = "shutdownMinecraftApplet", at = @At("HEAD"))
     public void injectShutdown(CallbackInfo ci) {
-        SeaCore.INSTANCE.onShutdown();
+        SeaCore.getINSTANCE().onShutdown();
     }
 
     @ModifyArg( method = "createDisplay", at = @At( value = "INVOKE", target = "Lorg/lwjgl/opengl/Display;setTitle(Ljava/lang/String;)V", remap = false ) )
@@ -51,12 +48,12 @@ public abstract class MinecraftMixin {
 
     @Inject(method = { "dispatchKeypresses" }, at = { @At("HEAD") })
     private void dispatchKeypresses(final CallbackInfo ci) {
-        SeaCore.INSTANCE.onKeyPress();
+        SeaCore.getINSTANCE().onKeyPress();
     }
 
     @Inject(method = { "runTick" }, at = @At("HEAD"))
     private void injectRunTick(CallbackInfo ci) {
-        SeaCore.INSTANCE.eventBus.post( new TickEvent() );
+        SeaCore.getINSTANCE().getEVENT_BUS().post( new TickEvent() );
     }
 
     /**
