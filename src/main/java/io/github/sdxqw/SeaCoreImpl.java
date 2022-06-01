@@ -44,10 +44,6 @@ public class SeaCoreImpl implements IReference {
         clientFontBoldSmaller = new CFontRenderer( new ResourceLocation("seaclient/font/Lato-Regular.ttf"), 22 );
     }
 
-    @Subscribe
-    protected void TickClient(TickEvent event) {
-    }
-
     public void onKeyPress() {
         if(Keybindings.HUD_SCREEN.isPressed()) {
             IHelper.minecraft.displayGuiScreen( new HudScreen() );
