@@ -11,7 +11,7 @@ public class ModuleMenu extends GuiScreen {
     @Override
     public void initGui() {
         super.initGui();
-        p = new Panel(this.width / 2 - 226, this.height / 2 - 150, this.width / 2 + 225, this.height / 2 + 150);
+        p = new Panel(this.width / 2 - 226, this.height / 2 - 130, this.width / 2 + 225, this.height / 2 + 150);
     }
 
     @Override

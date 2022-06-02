@@ -1,5 +1,9 @@
 package io.github.sdxqw.gui.module.menu;
 
 public enum PanelType {
-    MODULE, SETTINGS
+    MODULE, SETTINGS;
+
+    public enum ModuleType {
+        NORMAL, LARGE
+    }
 }

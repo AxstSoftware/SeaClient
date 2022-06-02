@@ -22,6 +22,7 @@ public class Panel {
     public int scrollAmount = 0;
 
     public PanelType pt = PanelType.MODULE;
+    public PanelType.ModuleType mt = PanelType.ModuleType.NORMAL;
     public Module m;
 
     protected Panel(int x, int y, int widthIn, int heightIn) {
@@ -33,34 +34,38 @@ public class Panel {
 
     public void drawPanel(int mouseX, int mouseY) {
 
-        if (this.pt == PanelType.MODULE) {
-            mb.clear();
+        if(this.mt == PanelType.ModuleType.NORMAL) {
+            if (this.pt == PanelType.MODULE) {
+                mb.clear();
 
-            int xAdd = 0;
-            int xFactor = 100;
-            int yAdd = 0;
-            int spots = 0;
+                int xAdd = 0;
+                int xFactor = 100;
+                int yAdd = 0;
+                int spots = 0;
 
-            while ((spots * xFactor) < (350)) {
-                spots++;
-            }
-
-            for(Module module : SeaCore.getINSTANCE().getModuleManager().getModules()) {
-
-                if (xAdd == (spots * xFactor) && xAdd != 0) {
-                    xAdd = 0;
-                    yAdd += 40;
+                while ((spots * xFactor) < (350)) {
+                    spots++;
                 }
 
-                this.mb.add(new ModuleButton(x + 30 + xAdd, y + 30 + yAdd + scrollAmount, 90, 30, module));
+                for(Module module : SeaCore.getINSTANCE().getModuleManager().getModules()) {
 
-                xAdd += xFactor;
+                    if (xAdd == (spots * xFactor) && xAdd != 0) {
+                        xAdd = 0;
+                        yAdd += 40;
+                    }
+
+                    mb.add(new ModuleButton(x + 30 + xAdd, y + 30 + yAdd + scrollAmount, 60, 20, module));
+
+                    xAdd += xFactor;
+                }
+
+                GL11.glEnable(GL11.GL_SCISSOR_TEST);
+                this.glScissor(x + 2, y + 25, w - 2, h - 2);
+                mb.forEach(ModuleButton::drawButton);
+                GL11.glDisable(GL11.GL_SCISSOR_TEST);
             }
-
-            GL11.glEnable(GL11.GL_SCISSOR_TEST);
-            this.glScissor(x + 2, y + 25, w - 2, h - 2);
-            mb.forEach(ModuleButton::drawButton);
-            GL11.glDisable(GL11.GL_SCISSOR_TEST);
+        } else if (this.mt == PanelType.ModuleType.LARGE) {
+            IHelper.font.drawString("test", 100,100,-1);
         }
 
     }
