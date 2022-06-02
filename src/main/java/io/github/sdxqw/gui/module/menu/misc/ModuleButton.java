@@ -4,7 +4,6 @@ import io.github.sdxqw.SeaCore;
 import io.github.sdxqw.module.Module;
 import io.github.sdxqw.utils.GuiUtils;
 import io.github.sdxqw.utils.interfaces.IHelper;
-import net.minecraft.client.gui.Gui;
 
 import java.awt.*;
 
@@ -15,7 +14,7 @@ public class ModuleButton {
     public int w;
     public int h;
 
-    private Module m;
+    private final Module m;
 
     public ModuleButton(int x, int y, int widthIn, int heightIn, Module module) {
         this.x = x;
@@ -26,16 +25,15 @@ public class ModuleButton {
     }
 
     public void drawButton() {
-        GuiUtils.drawSmoothRoundedRect(x, y, x + w, y + h, 10, new Color(55, 55, 55).getRGB());
-        Gui.drawRect(x + w - 20, y, x + w, y + h, getColor());
-        IHelper.font.drawString(m.name, x + w - 20 - IHelper.font.getStringWidth(m.getName()) - 5, y + h / 2 - IHelper.font.FONT_HEIGHT / 2, -1);
+        GuiUtils.drawSmoothRoundedRect(x, y, x + w, y + h, 10, getColor());
+        SeaCore.getINSTANCE().clientFontBoldSmaller.drawCenteredString(m.name, x + w - 20 - SeaCore.getINSTANCE().clientFontBoldSmaller.getStringWidth(m.name) - 5, y + (h >> 1) - (SeaCore.getINSTANCE().clientFontBoldSmaller.getHeight() >> 1) + 3, new Color(255,255,255).getRGB());
     }
 
     public int getColor() {
         if (m.isEnabled()) {
-            return new Color(32, 189, 45, 255).getRGB();
+            return new Color(42, 141, 255, 255).getRGB();
         } else {
-            return new Color(189, 32, 32).getRGB();
+            return new Color(103, 103, 103).getRGB();
         }
     }
 
