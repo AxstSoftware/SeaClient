@@ -3,7 +3,6 @@ package io.github.sdxqw.gui.module.menu.misc;
 import io.github.sdxqw.SeaCore;
 import io.github.sdxqw.module.Module;
 import io.github.sdxqw.utils.GuiUtils;
-import io.github.sdxqw.utils.interfaces.IHelper;
 
 import java.awt.*;
 
