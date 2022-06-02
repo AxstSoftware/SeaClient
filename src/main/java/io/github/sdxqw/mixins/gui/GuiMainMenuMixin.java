@@ -14,7 +14,6 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 
 import java.awt.*;
-import java.io.IOException;
 
 @Mixin(GuiMainMenu.class)
 public class GuiMainMenuMixin extends GuiScreen implements IHelper {

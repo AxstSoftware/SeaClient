@@ -7,7 +7,6 @@ import io.github.sdxqw.utils.interfaces.IHelper;
 import net.minecraft.client.gui.GuiScreen;
 
 import java.awt.*;
-import java.util.ArrayList;
 
 public class HudScreen extends GuiScreen implements IHelper {
 

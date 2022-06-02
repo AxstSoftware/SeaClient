@@ -18,10 +18,8 @@ apply plugin: 'org.spongepowered.mixin'
 
 group 'io.github.sdxqw'
 version '0.1'
-archivesBaseName = 'SeaClient'
 String tweaker = "seaclient"
 
-sourceCompatibility = targetCompatibility = JavaVersion.VERSION_1_8
 compileJava.options.encoding = 'UTF-8'
 
 minecraft {

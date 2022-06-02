@@ -3,13 +3,12 @@ package io.github.sdxqw.module.renderer;
 import io.github.sdxqw.utils.interfaces.IHelper;
 import lombok.Getter;
 import lombok.Setter;
-import net.minecraft.client.gui.ScaledResolution;
 import org.lwjgl.input.Mouse;
 
 import java.util.ArrayList;
 
 public class DraggableComponent {
-    private final ArrayList<RenderModule> modules = new ArrayList<>();
+    public final ArrayList<RenderModule> modules = new ArrayList<>();
 
     @Setter @Getter
     public int x;

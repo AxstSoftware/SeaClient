@@ -16,7 +16,7 @@ import java.io.InputStream;
  */
 public class CFont {
 	
-    protected CharData[] charData = new CharData[256];
+    protected final CharData[] charData = new CharData[256];
 
     protected DynamicTexture tex;
     protected Font font;
@@ -25,9 +25,9 @@ public class CFont {
     protected boolean fractionalMetrics;
 
     protected int fontHeight = -1;
-    protected int charOffset = 0;
+    protected final int charOffset = 0;
 
-    private float imgSize = 1048;
+    private final float imgSize = 1048;
 
     public CFont(ResourceLocation resourceLocation, float size) {
         Font tmp;

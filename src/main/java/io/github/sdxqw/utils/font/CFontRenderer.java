@@ -13,15 +13,15 @@ import java.util.List;
  */
 public final class CFontRenderer extends CFont {
 
-    protected final CFont.CharData[] boldItalicChars = new CFont.CharData[256];
-    protected final CFont.CharData[] italicChars = new CFont.CharData[256];
-    protected final CFont.CharData[] boldChars = new CFont.CharData[256];
+    private final CFont.CharData[] boldItalicChars = new CFont.CharData[256];
+    private final CFont.CharData[] italicChars = new CFont.CharData[256];
+    private final CFont.CharData[] boldChars = new CFont.CharData[256];
 
     private final int[] colorCode = new int[32];
 
-    private char COLOR_CODE_START = '\u00a7';
-    private float[] charWidthFloat = new float[256];
-    private byte[] glyphWidth = new byte[65536];
+    private final char COLOR_CODE_START = '\u00a7';
+    private final float[] charWidthFloat = new float[256];
+    private final byte[] glyphWidth = new byte[65536];
     private boolean unicodeFlag;
 
     /**
@@ -67,7 +67,7 @@ public final class CFontRenderer extends CFont {
     }
 
     public float drawCenteredString(String text, float x, float y, int color) {
-        return drawString(text, x - getStringWidth(text) / 2, y - getHeight()/2, color);
+        return drawString(text, x - (getStringWidth(text) >> 1), y - (getHeight() >> 1), color);
     }
     
     public void drawCenteredStringScaled(String text, int givenX, int givenY, int color, double givenScale) {
@@ -80,8 +80,8 @@ public final class CFontRenderer extends CFont {
     }
 
     public float drawCenteredStringWithShadow(String text, float x, float y, int color) {
-        drawString(text, x - getStringWidth(text) / 2 + 0.55D, y - getHeight()/2 + 0.55D, color, true);
-        return drawString(text, x - getStringWidth(text) / 2, y - getHeight()/2, color);
+        drawString(text, x - (getStringWidth(text) >> 1) + 0.55D, y - (getHeight() >> 1) + 0.55D, color, true);
+        return drawString(text, x - (getStringWidth(text) >> 1), y - (getHeight() >> 1), color);
     }
 
     public int getCharWidth(char character)
