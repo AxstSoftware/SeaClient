@@ -3,6 +3,7 @@ package io.github.sdxqw;
 import io.github.sdxqw.discord.DiscordIPC;
 import io.github.sdxqw.events.SCEventBus;
 import io.github.sdxqw.gui.module.HudScreen;
+import io.github.sdxqw.gui.module.menu.ModuleMenu;
 import io.github.sdxqw.module.ModuleManager;
 import io.github.sdxqw.utils.Keybindings;
 import io.github.sdxqw.utils.SessionChanger;
@@ -12,7 +13,7 @@ import io.github.sdxqw.utils.interfaces.IReference;
 import lombok.Getter;
 import net.minecraft.util.ResourceLocation;
 
-public class SeaCoreImpl implements IReference {
+class SeaCoreImpl implements IReference {
 
     @Getter
     private final SCEventBus EVENT_BUS = new SCEventBus();
@@ -39,8 +40,11 @@ public class SeaCoreImpl implements IReference {
     }
 
     public void onKeyPress() {
-        if(Keybindings.HUD_SCREEN.isPressed()) {
-            IHelper.minecraft.displayGuiScreen( new HudScreen() );
+        if (Keybindings.HUD_SCREEN.isPressed()) {
+            IHelper.minecraft.displayGuiScreen(new HudScreen());
+        }
+        if (Keybindings.MODULE_SCREEN.isPressed()) {
+            IHelper.minecraft.displayGuiScreen(new ModuleMenu());
         }
     }
 }
